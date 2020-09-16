@@ -2,125 +2,20 @@ kind: pipeline
 type: docker
 name: default
 
-workspace:
-  base: /go/src
-  path: ${DRONE_REPO_NAME}
-
-## 禁止默認 clone 行為
-clone:
-  disable: true
-
 steps:
-  ## clone 專案
-  - name: clone
-    image: nexus.cqgame.games/rd3/drone-git:latest
-    environment:
-      RSYNC_KEY:
-        from_secret: rsync_key
-    commands:
-      - git config --global user.name "drone"
-      - git config --global user.email "drone@cchntek.com"
-
-      # write the ssh key to disk
-      - mkdir ~/.ssh
-      - echo "$RSYNC_KEY" > ~/.ssh/id_rsa
-      - chmod 600 ~/.ssh/id_rsa
-
-      # add to known hosts
-      - ssh-keyscan -H git.cchntek.com >> ~/.ssh/known_hosts
-      - ssh-keyscan -H gitlab.cqgame.info >> ~/.ssh/known_hosts
-
-      - git clone ${DRONE_GIT_SSH_URL} .
-      - git checkout $DRONE_COMMIT
-    when:
-      ref: [ refs/heads/develop, refs/heads/qatest, refs/heads/int, refs/tags/v*, refs/tags/t* ]
-  ## 設定 dev tag
-  - name: set-dev-tag
-    image: nexus.cqgame.games/rd3/drone-git:latest
-    commands:
-      - echo "$(git rev-parse --short=7 ${DRONE_COMMIT_SHA})-dev" > ./tmp.txt
-      - cat ./tmp.txt > .tags
-      - echo ",latest-${DRONE_BRANCH}" >> .tags
-    when:
-      ref: [ refs/heads/develop ]
-
-  ## 備份 prod vendor.json
-  - name: backup-pro-vendor-json
-    image: nexus.cqgame.games/rd3/drone-git:latest
-    commands:
-      - echo release-${DRONE_TAG}  > ./tmp.txt
-      - cat ./tmp.txt > .tags
-      - echo ",latest-prod" >> .tags
-    when:
-      ref: [ refs/tags/v*, refs/tags/t* ]
-  ## 建置容器並傳至 harbor (INT Project)
-  - name: build-image
-    image: nexus.cqgame.games/rd3/drone-docker:18.09.6
-    environment:
-      ACCESS_TOKEN:
-        from_secret: access_token
+  - name: publish to gcr
+    image: plugins/gcr
     settings:
-      registry: nexus.cqgame.games
-      template: >
-      repo: nexus.cqgame.games/rd3/golang-durian
-      dockerfile: ./k8s.Dockerfile
-      username:
-        from_secret: docker_username
-      password:
-        from_secret: docker_password
-      build_args_from_env:
-        - ACCESS_TOKEN
-    volumes:
-      - name: docker
-        path: /var/run/docker.sock
-    when:
-      ref: [ refs/heads/develop, refs/heads/qatest, refs/heads/int ]
+      repo: gcr.io/k8s-0529/hello-web
+      tags: v1
+      json_key:
+        from_secret: google_credentials
 
-  ## 重新覆蓋 .tag 檔案內容
-  - name: rebuild-tag-file
-    image: nexus.cqgame.games/rd3/drone-git:latest
-    commands:
-      - cat ./tmp.txt > .tags
-      - cat .tags
-    when:
-      ref: [ refs/heads/develop, refs/heads/qatest, refs/heads/int, refs/tags/v*, refs/tags/t* ]
-
-  ## 佈署至 pro gcp k8s 環境
-  - name: deploy-pro-gcp-k8s
-    image: nexus.cqgame.games/rd3/drone-kubernetes:latest
-    settings:
-      kubernetes_server: https://uv-gke-rd3.guardians.one/k8s/clusters/local
-      namespace: rd3-pro-durian
-      deployment: pro-durian-deployment
-      repo: asia.gcr.io/secondary-267408/rd3-sync/golang-durian
-      container: pro-durian
-      tag: release-${DRONE_TAG}
-      kubernetes_token:
-        from_secret: kubernetes_token_s2
-    when:
-      ref: [ refs/tags/v* ]
-
-## VM 掛載路徑
-volumes:
-  - name: cache
-    host:
-      path: /usr/local/app/cache
-      # path: /usr/local/app/cache/${DRONE_REPO_NAME}/
-  - name: docker
-    host:
-      path: /var/run/docker.sock
-
-## 載入 log 設定
+## 載入 docker config 設定
 image_pull_secrets:
   - dockerconfigjson
 
-## 觸發 pipeline 條件
+# 觸發 pipeline 條件
 trigger:
   ref:
-    include:
-      - refs/heads/develop
-      - refs/heads/qatest
-      - refs/heads/int
-      - refs/tags/v*
-      - refs/tags/t*
-      - refs/tags/release-v*
+    include: [ refs/heads/develop, refs/heads/qatest, refs/heads/int, refs/tags/v*, refs/tags/t*, refs/tags/release-v* ]
