@@ -3,24 +3,24 @@ type: docker
 name: default
 
 steps:
-  - name: publish-to-gcr
-    image: plugins/gcr
-    settings:
-      repo: gcr.io/k8s-0529/hello-web
-      tags: latest
-      json_key: >
-        {
-          "type": "service_account",
-          "project_id": "k8s-0529",
-          "private_key_id": "0b8f43fd7dd3f311f86f26dcbed1826232885437",
-          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC2QwrYHJx4x+YG\nhSVHgga1+EmYjVgWr2GCHIOvSxwcPRcdqqykSFPylDyBirvYv3M5e3C4sZ+v17yU\n2nY8VQIY5nyxA8ZdSaBbr0/CNgLNvu8v4gloIxe9HfOjRkl85IeUeuplYvj5BaEw\nkGS4gVOnTL7FMp7aDEElLiGf7sqDr8GenXrUQ9QHwFW/adNXmK9LVdtVLuvwqY+N\nW4DmLArIcQcq03HF10WU3wpDxFCFfyy25OPHMJ97n7QDGZut37qEZpnsIAijlHkg\nSuKbp1vCJkaBWkLbvqfVUgEPpMA1bo3Iyc3Byj2y441k84rlG+r6cDMoUJpbTtHS\nZRYfZX97AgMBAAECggEAA5V7531gia3t1NrWKdNraZfYqMk0RbEAF1Aw/wLiZVBf\nIof5osmpnYqENmA0FKOOfyu2TJGYWbkQhCtELGNhsWgdn7qw43tVEr/ZOPXjY8OO\nZAn1IKBmzECEI4+MB8Wse0qTddMRtN0W7/KIJ0LKiIwvPunmcja8Pm7/GOJht66J\ntej6FaQL1Dnnh5IlsG+5VYdlSIL8Ne2cygrhvbXcSLcczGqzbWgjM4q64YqqNE8l\n7QWjOz1nYffqfA00f4UzJzvjQfE+SFxw4B7fWW+EVBRny51MKLgWaHhOSans4VU7\n0dgAu8/MvcdRPZtHkR+ZwZ/4DF9wEmn2Hfm1xXtb4QKBgQDljWHEffBGSd6HCpWG\nxQRaTuln3F3/pxaMXAvH0eAPdGhh39ipOfQ/Ovpx7X3V482BWx/44imzKAO79vTh\nX6uc53GH1nJ5e6hEds8X4BBjUJrZNPCvBPWih4RnbdP06k2VE3Pz//GMuMIy4qbX\nFWtcF/ssbY0W3KoUjq4tw6ZXcQKBgQDLQtX5NKrSKTyzWdW+tiXGWajwfNe/YQEf\nCq+H8NFDK9+TXsqWhq+jA09euFinDuW3D3OiXZLdG/0gUaQq8wWLGxuaXMmGOAXB\nDtCo+jD8tesMeaARcbrYa5izO8n2ZTDJlQVjpH4x/D4fobh9VNgg/F3s6dbREw9L\nTBeYELUHqwKBgQDXAmNF0ZRhscUOBdriXd1i3TEACEe/MvkKxRh/tFRDBYzTyAA/\nGbpuE0cLuSA5XGNbu0eqLeRTG7LLt1fNVXf/wkTzr+iPY0TLw+DcAxI2hARWWKDr\nviB5eKeK3TM/3sqGTK86J0xPu6qiUOtm4HgrzYaFKaOSe2OPV8lLsks28QKBgEWe\nY8mSd3u6MhdACszieHfCl/Ge4QqkwAyQzWRjYFmAenhwfDUodpn/9Tx9Kag2mwmj\nWjjfkgD3qDBcpj0rtddado7dfwzgvV/NojxuTT8RVCuWsPOon5Wm7MtfDCK/sAEr\ncIgbfDnEqsaMzrLmz4wkxEr0IObFf3SL4HzuJAM3AoGAGl8qg6AvwJnCfPInyAwU\n1wEetpovA3MuErly2Y9wrqorLnhA38sxK5PCabGYv98N9ANQ4PLd7IOAbfhI+rw1\nLM8paRJ28od/+e4d1YiRc/EXhpUXbCU067e55aozQv8oWyvkQ/uzTrY3trAhrDyq\nMszi/BwCKeCxoLiurU4mL1I=\n-----END PRIVATE KEY-----\n",
-          "client_email": "google-credentials@k8s-0529.iam.gserviceaccount.com",
-          "client_id": "103935774276474148233",
-          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-          "token_uri": "https://oauth2.googleapis.com/token",
-          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/google-credentials%40k8s-0529.iam.gserviceaccount.com"
-        }
+#  - name: publish-to-gcr
+#    image: plugins/gcr
+#    settings:
+#      repo: gcr.io/k8s-0529/hello-web
+#      tags: latest
+#      json_key: >
+#        {
+#          "type": "service_account",
+#          "project_id": "k8s-0529",
+#          "private_key_id": "0b8f43fd7dd3f311f86f26dcbed1826232885437",
+#          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC2QwrYHJx4x+YG\nhSVHgga1+EmYjVgWr2GCHIOvSxwcPRcdqqykSFPylDyBirvYv3M5e3C4sZ+v17yU\n2nY8VQIY5nyxA8ZdSaBbr0/CNgLNvu8v4gloIxe9HfOjRkl85IeUeuplYvj5BaEw\nkGS4gVOnTL7FMp7aDEElLiGf7sqDr8GenXrUQ9QHwFW/adNXmK9LVdtVLuvwqY+N\nW4DmLArIcQcq03HF10WU3wpDxFCFfyy25OPHMJ97n7QDGZut37qEZpnsIAijlHkg\nSuKbp1vCJkaBWkLbvqfVUgEPpMA1bo3Iyc3Byj2y441k84rlG+r6cDMoUJpbTtHS\nZRYfZX97AgMBAAECggEAA5V7531gia3t1NrWKdNraZfYqMk0RbEAF1Aw/wLiZVBf\nIof5osmpnYqENmA0FKOOfyu2TJGYWbkQhCtELGNhsWgdn7qw43tVEr/ZOPXjY8OO\nZAn1IKBmzECEI4+MB8Wse0qTddMRtN0W7/KIJ0LKiIwvPunmcja8Pm7/GOJht66J\ntej6FaQL1Dnnh5IlsG+5VYdlSIL8Ne2cygrhvbXcSLcczGqzbWgjM4q64YqqNE8l\n7QWjOz1nYffqfA00f4UzJzvjQfE+SFxw4B7fWW+EVBRny51MKLgWaHhOSans4VU7\n0dgAu8/MvcdRPZtHkR+ZwZ/4DF9wEmn2Hfm1xXtb4QKBgQDljWHEffBGSd6HCpWG\nxQRaTuln3F3/pxaMXAvH0eAPdGhh39ipOfQ/Ovpx7X3V482BWx/44imzKAO79vTh\nX6uc53GH1nJ5e6hEds8X4BBjUJrZNPCvBPWih4RnbdP06k2VE3Pz//GMuMIy4qbX\nFWtcF/ssbY0W3KoUjq4tw6ZXcQKBgQDLQtX5NKrSKTyzWdW+tiXGWajwfNe/YQEf\nCq+H8NFDK9+TXsqWhq+jA09euFinDuW3D3OiXZLdG/0gUaQq8wWLGxuaXMmGOAXB\nDtCo+jD8tesMeaARcbrYa5izO8n2ZTDJlQVjpH4x/D4fobh9VNgg/F3s6dbREw9L\nTBeYELUHqwKBgQDXAmNF0ZRhscUOBdriXd1i3TEACEe/MvkKxRh/tFRDBYzTyAA/\nGbpuE0cLuSA5XGNbu0eqLeRTG7LLt1fNVXf/wkTzr+iPY0TLw+DcAxI2hARWWKDr\nviB5eKeK3TM/3sqGTK86J0xPu6qiUOtm4HgrzYaFKaOSe2OPV8lLsks28QKBgEWe\nY8mSd3u6MhdACszieHfCl/Ge4QqkwAyQzWRjYFmAenhwfDUodpn/9Tx9Kag2mwmj\nWjjfkgD3qDBcpj0rtddado7dfwzgvV/NojxuTT8RVCuWsPOon5Wm7MtfDCK/sAEr\ncIgbfDnEqsaMzrLmz4wkxEr0IObFf3SL4HzuJAM3AoGAGl8qg6AvwJnCfPInyAwU\n1wEetpovA3MuErly2Y9wrqorLnhA38sxK5PCabGYv98N9ANQ4PLd7IOAbfhI+rw1\nLM8paRJ28od/+e4d1YiRc/EXhpUXbCU067e55aozQv8oWyvkQ/uzTrY3trAhrDyq\nMszi/BwCKeCxoLiurU4mL1I=\n-----END PRIVATE KEY-----\n",
+#          "client_email": "google-credentials@k8s-0529.iam.gserviceaccount.com",
+#          "client_id": "103935774276474148233",
+#          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+#          "token_uri": "https://oauth2.googleapis.com/token",
+#          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+#          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/google-credentials%40k8s-0529.iam.gserviceaccount.com"
+#        }
   - name: deplyment-to-gke
     image: quay.io/honestbee/drone-kubernetes
     settings:
