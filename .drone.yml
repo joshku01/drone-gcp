@@ -30,8 +30,6 @@ steps:
       deployment: hello-web
       repo: gcr.io/k8s-0529/hello-web
       container: hello-web
-      tag:
-        - latest
   when:
     ref: [ refs/heads/develop ]
 
