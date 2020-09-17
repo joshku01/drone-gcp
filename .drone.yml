@@ -30,9 +30,10 @@ steps:
       deployment: hello-web
       repo: gcr.io/k8s-0529/hello-web
       container: hello-web
-      tag: latest
-   when:
-     ref: [refs/heads/develop]
+      tag:
+        - latest
+  when:
+    ref: [ refs/heads/develop ]
 
 ## 載入 docker config 設定
 image_pull_secrets:
