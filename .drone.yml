@@ -11,7 +11,7 @@ steps:
       debug: true
   - name: build
     image: golang:1.15-alpine
-    pull: always
+    pull: true
     commands:
       - apk add --update make git
       - make drone-cache
