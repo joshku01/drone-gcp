@@ -3,6 +3,24 @@ type: docker
 name: default
 
 steps:
+  - name: build-image
+    image: meltwater/drone-cache
+    settings:
+      restore: true
+      bucket: true
+      debug: true
+  - name: build
+    image: golang:1.15-alpine
+    pull: always
+    commands:
+      - apk add --update make git
+      - make drone-cache
+  - name: restore-cache-debug
+    image: meltwater/drone-cache:dev
+    settings:
+      pull: true
+      rebuild: true
+      debug: true
   - name: publish-to-gcr
     image: plugins/gcr
     settings:
