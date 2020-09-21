@@ -10,7 +10,7 @@ COPY go.sum .
 RUN go mod download
 
 # Copy src code from the host and compile it
-RUN CGO_ENABLED=0 GOOS=linux go build -a -o /hello-web /main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -o hello-web
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
