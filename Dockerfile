@@ -17,7 +17,8 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /app .
-CMD ["/app"]
+ENV PORT 8080
+CMD ["./app"]
 #ADD . /go/src/hello-web
 #RUN go build
 #ENV PORT 8080
