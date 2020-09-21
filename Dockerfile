@@ -9,7 +9,7 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 
-ADD . /go/src/hello-app
+ADD . /go/src/hello-web
 RUN go build
 ENV PORT 8080
 CMD ["./hello-app"]
