@@ -2,6 +2,7 @@ FROM golang:1.15-alpine AS builder
 #enable Go module support
 ENV GO111MODULE=on
 
+COPY . /app
 WORKDIR /app
 
 #manage dependencies
@@ -14,7 +15,8 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o app main.go
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
-COPY --from=builder /app /
+WORKDIR /root/
+COPY --from=builder /app .
 CMD ["/app"]
 #ADD . /go/src/hello-web
 #RUN go build
