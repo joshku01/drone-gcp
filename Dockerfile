@@ -10,9 +10,6 @@ COPY go.sum .
 RUN go mod download
 
 ADD . /go/src/hello-app
-RUN go install hello-app
-
-FROM alpine:latest
-COPY --from=0 /go/bin/hello-app .
+RUN go build
 ENV PORT 8080
 CMD ["./hello-app"]
