@@ -9,7 +9,16 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 
-ADD . /go/src/hello-web
-RUN go build
-ENV PORT 8080
-CMD ["./hello-app"]
+# Copy src code from the host and compile it
+COPY cmd cmd
+COPY pkg pkg
+RUN CGO_ENABLED=0 GOOS=linux go build -a -o /hello-web cmd/main.go
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+COPY --from=builder /hello-web /bin
+CMD ["/bin/myapp"]
+#ADD . /go/src/hello-web
+#RUN go build
+#ENV PORT 8080
+#CMD ["./hello-app"]
